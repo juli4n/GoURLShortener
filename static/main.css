@@ -1,0 +1,31 @@
+.rootDiv {
+  background-color: #ebc137;
+  border-radius: 15px 15px 15px 15px;
+  padding: 20px 20px 20px 20px;
+}
+
+.footer {
+  background-color: #db4c2c;
+  border-radius: 15px 15px 15px 15px;
+  height: 100px;
+  margin: 20px 0px 0px 0px;
+  width: 630px;
+}
+
+.footerMessage {
+  padding: 10px 0px 0px 10px;
+}
+
+.newLinkyURL {
+  margin: 10px 0px 0px 10px;
+}
+
+.newLinkyStats {
+  margin: 10px 0px 0px 10px;
+}
+
+.addLinkyInput {
+  margin: 10px 0px 0px 0px;
+  height: 70px;
+  width: 70px;
+}

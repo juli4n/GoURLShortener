@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+  </head>
+<body>
+<div class='rootDiv'>
+  <h1>Linky - Yet Another URL Shortener</h1>
+
+<form action="/add/" method="POST">
+  <div class='addLinkyName'>
+    <div>Name:</div>
+    <div><input type="text" name="name"></div>
+  </div>
+  <div class='addLinkyURL'>
+    <div>URL:</div>
+    <div><input type="text" name="url"></div>
+  </div>
+  <div class='addLinkyButton'>
+    <input type="submit" value="Create!" class="addLinkyInput">
+  </div>
+
+  {{if .LinkyURL}} 
+  <div class='footer'>
+    <div class='footerMessage'>
+      <b>New Linky Added</b>
+    </div>
+    <div class='newLinkyURL'>
+      URL: <a href='http://{{.LinkyURL}}'>{{.LinkyURL}}</a>
+    </div>
+    <div class='newLinkyStats'> 
+      Stats: <a href='http://{{.StatsURL}}'>{{.StatsURL}}</a> 
+    </div>
+  </div>
+  {{end}}
+
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html>
+    <head>
+      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+      <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.load('visualization', '1', {'packages': ['geochart']});
+
+        google.setOnLoadCallback(drawChart);
+
+        function formatDate(aDate) {
+          return aDate.getDate() + "-" + aDate.getMonth()+1 + "-" + aDate.getFullYear();
+        }
+
+        function drawChart() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Day');
+          data.addColumn('number', 'Clicks');
+          data.addRows([
+            {{range $k, $v := .Visits}}
+            [formatDate(new Date({{$k}} * 1000)), {{$v}}],
+            {{end}}
+          ]);
+
+          var options = {
+            width: 500, height: 300,
+            title: 'Links',
+            backgroundColor: '#ebc137',
+            colors: ['#db4c2c', '#771e10', '#48100c']
+          };
+          var chart = new google.visualization.BarChart(
+            document.getElementById('clicks_chart_div'));
+          chart.draw(data, options);
+        }
+
+        google.setOnLoadCallback(drawRegionsMap);
+        
+        function drawRegionsMap() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Country');
+          data.addColumn('number', 'Clicks');
+          data.addRows([
+            {{range $k, $v := .ClickMap}}
+              ['{{$k}}', {{$v}}],
+            {{end}}
+          ]);
+          var options = {
+            width: 500, height: 300,
+            title: 'Click Geolocalization',
+            backgroundColor: '#ebc137',
+            colors: ['#db4c2c', '#771e10', '#48100c']
+          };
+          var chart = new google.visualization.GeoChart(
+            document.getElementById('geo_chart_div'));
+          chart.draw(data, options);
+        }
+      </script>
+      <link rel="stylesheet" type="text/css" href="/static/stats.css" />
+    </head>
+    <body>
+      <div class='rootDiv'>
+        <h1>Statistics - /{{.LinkyName}}</h1>
+        <div id="clicks_chart_div" class="clicks_chart_div"></div>
+        <div id="geo_chart_div" class="geo_chart_div"></div>
+      </div>
+  </body>
+</html>
